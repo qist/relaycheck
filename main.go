@@ -8,16 +8,17 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qist/relaycheck/mihomo"
-	"github.com/qist/relaycheck/tvgate"
 	"github.com/qist/relaycheck/config"
+	"github.com/qist/relaycheck/mihomo"
 	"github.com/qist/relaycheck/parser"
+	"github.com/qist/relaycheck/tvgate"
 	"github.com/qist/relaycheck/utils"
 	"github.com/qist/relaycheck/worker"
 )
 
 var successfulIPsCh chan string
 var workerPool *worker.WorkerPool
+var VersionFlag *bool
 
 func main() {
 	// 使用flag包解析命令行参数
@@ -28,7 +29,12 @@ func main() {
 	outputFile := flag.String("output", "", "输出 YAML 文件路径，默认 filtered_proxies.yaml")
 	namePrefix := flag.String("name", "广东电信", "Clash TVGate YAML name 前缀")
 	maxSec := flag.Float64("maxsec", 0, "最大耗时秒数，0 表示不过滤")
+	VersionFlag = flag.Bool("version", false, "显示程序版本")
 	flag.Parse()
+	if *VersionFlag {
+		fmt.Println("程序版本:", config.Version)
+		return
+	}
 	start := time.Now() // 记录开始时间
 	fmt.Println("扫描开始: ", time.Now().Format("2006-01-02 15:04:05"))
 	// 加载配置文件

@@ -1,4 +1,14 @@
-## 代理扫描
+## 编译
+
+```bash
+git clone https://github.com/qist/relaycheck.git
+cd relaycheck
+make 
+清理 编译 
+make clean
+```
+
+## 代理扫描&验证工具
 
 ### 配置文件说明（config.yaml）
 
@@ -76,15 +86,15 @@
 ```bash
 # 验证可用代理
 ## 当前目录执行
-./relaycheck-linux-amd64 
+./Relaycheck-linux-amd64 
 ## 指定配置文件执行
-./relaycheck-linux-amd64 -config=config.yaml
+./Relaycheck-linux-amd64 -config=config.yaml
 ## 生成Clash默认
-./relaycheck-linux-amd64 -clash
+./Relaycheck-linux-amd64 -clash
 ## 生成Clash，过滤耗时超过2秒的代理
-./relaycheck-linux-amd64 -config=config.yaml -clash -input=successful_zubo.txt -output=clash.yaml -name="广东电信" -maxsec=2
+./Relaycheck-linux-amd64 -config=config.yaml -clash -input=successful_zubo.txt -output=clash.yaml -name="广东电信" -maxsec=2
 ## 生成TVgate默认
-./relaycheck-linux-amd64 -tvgate
+./Relaycheck-linux-amd64 -tvgate
 ## 生成TVgate，过滤耗时超过2秒的代理
-./relaycheck-linux-amd64 -config=config.yaml -tvgate -input=successful_zubo.txt -output=tvgate.yaml -name="广东电信" -maxsec=2
+./Relaycheck-linux-amd64 -config=config.yaml -tvgate -input=successful_zubo.txt -output=tvgate.yaml -name="广东电信" -maxsec=2
 ```
