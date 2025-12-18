@@ -1,0 +1,156 @@
+# 配置文件示例
+ports:
+  # - "1080"  # 代理服务器端口
+  # - "443"
+  # - "7890"
+  - 59059
+  # - "7891"
+urlPaths:
+  # - "http://live2.rxip.sc96655.com/live/emdy4k_8000.m3u8?E=1&U=1&A=1&K=1&P=1&S=1"  # 完整URL地址
+  # - "http://sc.rrs.169ol.com/PLTV/88888888/224/3221227988/index.m3u8"
+  # - "http://rrs03.hw.gmcc.net:8088/PLTV/651/224/3221226737/1.m3u8"
+  # - "http://ott.fj.chinamobile.com/PLTV/88888888/224/3221226908/index.m3u8"
+  # - "http://iptvrr.sh.chinamobile.com:6060/cms001/ch00000090990000001022/index.m3u8"
+  # - "http://39.135.133.9:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226559/index.m3u8?"
+  # - "http://111.56.121.176:80/050000001888/5000000188800000192/index.m3u8?stbId=nil&channel-id=yinhe_live&Contentid=5000000188800000192"
+  # - "http://gslbserv.iptv.nm.chinamobile.com/PLTV/88888890/224/3221225737/index.m3u8?fmt=ts2hls"
+  # - "http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000152"
+  # - "http://zxrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226386/index.m3u8"
+  # - "http://live.cbncdn.cn/__cl/cg:live/__c/cctv1HD/__op/default/__f/index.m3u8?sig=d698e26597857c7a9b3c69a97d87c7f9&ext_start_limit=1755316178&int_start_limit=1755316178&expires=1755316178&c=null"
+  # - "http://dbiptv.sn.chinamobile.com/PLTV/88888890/224/3221225804/index.m3u8"
+  # - "http://live-gitv-hb-yh.189smarthome.com/live/program/live/cctv1hd/4000000/mnf.m3u8?_userId=023970000123334&_taskId=HEDXFF049573FE250225120215265555&CDNSecret=dcdd43c3e84f160010e2536f86ff0608&time=20251203152655"
+  # - "http://219.150.127.78/PLTV/88888888/224/3221227111/index.m3u8"
+  # - "http://171.105.39.110:6060/bestv_live/cctv1hd8m/1.m3u8?Playtype=1&m3u8_level=2"
+  # - "http://ucdn6.sd.chinamobile.com:8089/00/SNM/CHANNEL40000005/index.m3u8"
+  # - "http://zxrr.jx.chinamobile.com:8080/PLTV/88888910/224/3221226386/index.m3u8"
+  # - "http://sxydajtvlive.sx.chinamobile.com/PLTV/-/224/3221226032/1.m3u8"
+  # - "http://hwottcdn.ln.chinamobile.com/PLTV/11/224/3221226731/index.m3u8"
+  # - "http://ahbczp.live.ahct.lv1.vcache.cn:9090/live/program/live/cctv1hd8m/8000000/mnf.m3u8?m3u8_level=2"
+  # - "http://live.cbncdn.cn/__cl/cg:live/__c/cctv1HD/__op/default/__f/index.m3u8?sig=bff66d127069e1f8df9085798f51a581&ext_start_limit=1749213039&int_start_limit=1749213039&expires=1749213039&c=null&p=3073"
+  # - "https://ali-hlspull.video-voip.com/live/tv13-yXpx7sNpThJs2x2k8wEVj4pOy4cfePBRPpnMDCAHLqMOVFejuOd7hOl10MV4GmR2yWqJ.flv"
+  # - "http://cdnrrs.gz.chinamobile.com/PLTV/88888888/224/3221225777/1/01.m3u8?fmt=ts2hls"
+  # - "http://tvgslb.hn.chinamobile.com:8089/180000001002/00000001000000000099000000193885/main.m3u8?stbid="
+  # - "http://39.134.13.35:6610/180000001001/00000001000000000007000000001242/index.m3u8?"
+  # - "http://tvgslb.hn.chinamobile.com:8089/180000001002/32024051115115876100680691227085/main.m3u8?stbid="
+  # - "http://124.232.231.172:8089/000000002000/201500000233/index.m3u8?starttime=&zte_offset=0&ispcode=2"
+  # - "http://14.204.32.196:6410/00000003/2/H_YNWS?virtualDomain=00000003.live_hls.zte.com&programid=xxx&stbid=hotel&userid=hotel"
+  # - "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221236378/index.m3u8"
+  # - "http://otttv.bj.chinamobile.com/PLTV/88888888/224/3221226895/index.m3u8?GuardEncType=2&tenantId=8601&accountinfo=~~V2.0~I0Rkc6neBYgfpoJ1yud8Fw~v5Ty0D-L-SSJPMfKIoCxqkyYpNw-Iys93Twb5Wp3HBY-B8uKS-kYSChS36A8-YLW~ExtInfo9bj61dxzlMXrsixrqcFYPg,END"
+  # - "http://huaweicdn.hb.chinamobile.com/PLTV/88888888/224/3221226113/1.m3u8"
+  # - "rtsp://111.63.123.196:554/PLTV/18/224/3221226472/312109478.smil?accountinfo=~~V2.0~k6yvKDO3kuG5pPEl7CdC3Q18031ce742e96aa977280d3353d34ada~gbMpmmclA7bQsqwiups-_SGGqlDmw8xpon3idujxX38sZxDZ-1uvc2LDNNhPEgga67b45dc3392dccfb17ae101fda2fc04e,END"
+  # - "http://ott.mobaibox.com/PLTV/4/224/3221225530/index.m3u8"
+  # - "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221228318/index.m3u8?fmt=ts2hls"
+  # - "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221236295/index.m3u8?fmt=ts2hls"
+  # - "http://[2409:8087:1070:301:2028::23]/gslbserv.iptv.nm.chinamobile.com/PLTV/88888890/224/3221225920/index.m3u8?fmt=ts2hls"
+  # - "http://124.232.231.172:8089/000000002000/201500000233/index.m3u8?starttime=&zte_offset=0&ispcode=2"
+  # - "http://39.136.12.4:6610/PLTV/88888888/224/3221225777/1/index.m3u8?fmt=ts2hls"
+  # - "http://yinhelive.zhongping.jsinfo.net:6060/gitv_live/G_YITANCQ/1.m3u8?m3u8_level=2"
+  # - "http://ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226016/1.m3u8?"
+  # - "http://39.134.64.87:6610/PLTV/88888888/224/3221226016/index.m3u8?IASHttpSessionId="
+  # - "http://tencent.live.cbncdn.cn/__cl/cg:live/__c/cctv11HD/__op/default/__f/index.m3u8?&sign=b5bc72bbb1192b8b710430b7d397b3c6&t=1754053902"
+  - "https://www.baidu.com"
+  # - "http://cache.ott.bestlive.itv.cmvideo.cn:80/000000001000/5000000004000002226/1.m3u8?stbId=37db0584d2bf5830e5d28241380ecbc5&livemode=1&channel-id=bestzb&Contentid=5000000004000002226&mos=jbjhhzstsl&version=1.0&owaccmark=5000000004000002226&owchid=bestzb&owsid=5918011765269157509&AuthInfo=ewHaCCw8B6%2FPcAUTjJh89CU%2BhuXyIBKt2MAlaOP2YQbGGJjmdhNK8cnZv%2FhnhyffSBda0MJF8M355nTiFsr%2BVqmzprIn4r5YocOy0UFmuKqBC7YourrVBvu9rz0jWmUo"
+  # - "https://liveplay-coocaa-sxiptv.ifengli.com/live/cctv-1HD/playlist.m3u8?wsSecret=facd6276161b34b68c9a6ad5495b6cfc&wsABSTime=6928f7d0&us=0"
+  # - "http://172.31.203.136:8006/jscn/LianYunGangZongHeHD.m3u8"
+  # - "http://live-gitv-hbyx-yh.189smarthome.com/live/OP001/IP-CCTV-1HD/index.m3u8?id=766724911246@ott&exp=20250826T110719&key=ec26746c85d8768836d443931608e6ba&mac=520FD78B9BFF&secret=ec4688c44e320da2a754a9d8a9c9fd25&time=20250827110719"
+  # - "https://www.google.com"
+  # - "http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225642/index.m3u8"
+  # - "rtsp://139.215.98.88/PLTV/88888888/224/3221225620/10000100000000060000000014261464_0.smil"
+  # - "http://4gtv.korice.eu.org/4gtv-live030/index.m3u8"
+  # - "https://4gtvfree-cds.cdn.hinet.net/live/pool/4gtv-live030/4gtv-live-mid/10801754422510.ts?token1=nzJNI0pajnz_bKbEKoEd3g&expires1=1754585747"
+  # - "http://27.148.240.185/PLTV/88888888/224/3221226773/1.m3u8"
+  # - "http://112.89.33.5:80/PLTV/88888973/224/3221226660/10000100000000060000000002048488_0.smil/01.m3u8?fmt=ts2hls,1705,01.m3u8,0,8592,0,0&accountinfo=7P9%2FPZjGeZIv%2BPttGdhw9fGClzuqx%2FsLFLhIzoPz02WEpMq%2BuHlr7w22b0Xyl8ca94n8QyvdBg7fuBA6DPwMaPtfJ%2Be5cuPukUHUQrsTrlmMAcBkbs8LL691ccJjISEL%2CEND&GuardEncType=2&tenantId=8601"
+  # - "http://112.89.45.21:80/PLTV/88888973/224/3221225768/10000100000000060000000000337107_0.smil/01.m3u8?fmt=ts2hls,244,01.m3u8,0,8596,0,0&accountinfo=7P9%2FPZjGeZIv%2BPttGdhw9fGClzuqx%2FsLFLhIzoPz02WEpMq%2BuHlr7w22b0Xyl8caSUUYbifkWztfC%2FWbgLR9FvtfJ%2Be5cuPukUHUQrsTrlmMAcBkbs8LL691ccJjISEL%2CEND&GuardEncType=2&tenantId=8601"
+  # - "http://172.16.149.41:9090/live/3302.m3u8"
+  # - "http://10.223.3.189/PLTV/88888888/224/3221225703/10000100000000060000000000035351_0.smil/index.m3u8?fmt=ts2hls&tenantId=8601&GuardEncType=2&accountinfo=~~V2.0~p6OgLDvLzq6GN5uNV8rZ0g~GBgYt2G4g3mp1H7Khhun9o6Zuj3ZkcZIB_HquE1b4VEarRFWx1w4xcRrXpOi2MxRI2bJNcVCpNQZiqYy2TQFYgBt4on5bTDSw95vyOkgHqI%2CEND"
+  # - "http://10.255.126.3:8006/AHBKLIVE/00000001000000050000000000000152"
+  # - "http://tencent.live.cbncdn.cn/__cl/cg:live/__c/cctv2HD/__op/default/__f/index.m3u8?&sign=3fb4995e6dd86406ad53ddb7c74dc6f5&t=1755817912"
+  # - "http://10.49.6.247:8112/AHBKLIVE/11111120210421000000000000000053"
+  # - "rtsp://139.215.98.88/PLTV/88888888/224/3221225620/10000100000000060000000014261464_0.smil"
+  # - "rtsp://10.11.43.21/PLTV/88888912/224/3221226446/10000100000000060000000000870185_0.smil"
+  # - "http://10.255.129.26:6060/ZTE_EPG16/2/9025?virtualDomain=ZTE_EPG16.live_hls.zte.com"
+  # - "http://tencent.live.cbncdn.cn/__cl/cg:live/__c/cctv1HD/__op/default/__f/index.m3u8?&sign=ce13c78432d65a1e67f39a58012e5660&t=1753911279"
+  # - "http://[2409:8087:1a01:df::7005]:80/ottrrs.hl.chinamobile.com/PLTV/88888888/224/3221226016/1.m3u8"
+  # - "rtsp://123.147.113.84:554/04000001/01000000004000000000000000000231?AuthInfo=xxx&userid="
+  # - "http://27.148.240.185/PLTV/88888888/224/3221226773/1.m3u8"
+  # - "https://qist.cc/ea78a22e165f70136afac562df7a08ff8cbd4970/fjgd.php?id=fhzw"
+  # - "rtsp://183.59.134.164/PLTV/88888905/224/3221227270/10000100000000060000000001141346_0.smil?0&accountinfo=%7E%7EV2.0%7EUwOl-Gl8Z1MFFJlY1q_RCg%7EApBzL3r_voXq10M-GWtX1pp12YK6-zQpQOUIOl0wbjEq730dUqnc_SjPYjiOQWwdythRrEf7Hp9ToXshxUNGDpwMHPmgDEdR_mdoJOtFf3o~ExtInfoWNHSPSTb+3AG0FnUkYLPMw==%2C-1%2C0%2C1%2C%2C%2C7%2C%2C%2C%2C4%2CEND&GuardEncType=2"
+  # - "rtsp://183.59.156.166/PLTV/88888905/224/3221230302/807931402.smil?rrsip=125.88.70.140,rrsip=125.88.104.40&zoneoffset=480&icpid=1111116&limitflux=-1&limitdur=-1&tenantId=8601&accountinfo=%7E%7EV2.0%7EmG6LRQRHyFT3PIpdiBc1Dw%7EH0w1NaKPRp_73RBEfbZ0vktclXk_R_raDd4JO8ohAxUCWKhP7OGw8GsUngBQt_X-hy6p13IxcBf6rGJf-wn_E8aD58qpCh-8C6KtWST1vjo%7EExtInfoPC2ZKLw95m5z2wHEEFeSaQ%3A20250803102145%2C28589592%2C10.91.45.186%2C20250803102145%2C02000006000000052025061699000004%2C28589592%2C-1%2C0%2C1%2C%2C%2C2%2C%2C%2C%2C2%2C%2C807931402%2CEND&GuardEncType=2"
+  # - "rtsp://118.212.169.134/PLTV/88888888/224/3221227034/10000100000000060000000000570885_0.smil"
+  # - "http://120.210.193.151:8006/120000001001/wlds:8080/ysten-business/live/HD-8M-1080P-cctv1/1.m3u8"
+  # - "http://183.59.131.100:30001/PLTV/88888905/224/3221230032/320917528.smil/index.m3u8?fmt=ts2hls&accountinfo=%7E%7EV2.0%7EgDBfCrlNs_X3qljSJ3njZQ%7EbLOzG9vYoN7ey7iY69nHZdPUiRe2_9L3SU-HYMCkcDkvsW4hTJlWEWMhTlEZzYxFU6JrebBV1RfOih5WutglnTFb-CIDdUvB5gc2peegd1o~ExtInfoWNHSPSTb+3AG0FnUkYLPMw%2CEND&GuardEncType=2&tenantId=8601"
+  # - "http://14.204.32.196:6410/00000003/2/H_CCTV2?virtualDomain=00000003.live_hls.zte.com&programid=xxx&stbid=hotel&userid=hotel"
+  # - "rtsp://125.88.53.18/PLTV/88888905/224/3221226963/00000100000000060000000000554901_0.smil#AWVZUXTl_NkY0zIKkN7USQ"
+  # - "rtsp://183.59.156.166/PLTV/88888905/224/3221227218/10000100000000060000000000988525_0.smil?accountinfo=%7E%7EV2.0%7EFqqKP_YcNL-1jY2wp1xT-Q%7EotQiB7U75LaiWvtXcA4tEka-aj81Z9jeylcZRQYPVw_ImPZ3HbPwPhtzqyxhmrL1lPme3IqRVXpJ6Qn2rzPSYCtmPFMZ9tyAZW7hGgMutYI%7EExtInfoPC2ZKLw95m5z2wHEEFeSaQ%3A20250708170533%2C10500014627785%2C10.218.118.100%2C20250708170533%2C02000001000000050000000000000374%2C10001009355026%2C-1%2C0%2C1%2C%2C%2C2%2C%2C%2C%2C2%2C%2C10000100000000060000000000988525_0%2CEND&GuardEncType=2"
+  # - "rtsp://175.42.216.15:554/PLTV/88888909/224/3221225772/10000100000000060000000001418882_0.smil?tenantId=8601&GuardEncType=2&accountinfo=%7E%7EV2.0%7ELH8MsPHy59a2ps7cNuwGIgbb4f472881974ad45139740f60c8b033%7E6Iorx0R6PPuLp9_D4PV55Pd6ZuOrk2iveMPkarzv53ZPmzZoULV3xRFRszP7UXOdzxY1cvjgeRQvwo9TXQdkzy-md9jnnjpnTwAG2m5SL-cb833cc23691af2c1835d2cf4f6d08885%7EExtInfoeu7Ia8Nawm0LIgNUil0sFQ9dfc079662e8b7dfd5a2a7316d2aa02e%0%2C485800%2C58.22.240.213%0%0%2C485800%2C-1%2C0%2C1%2C%2C%2C7%2C%2C%2C%2C4%2C%0%2CEND"
+  # - "rtsp://175.42.216.15:554/PLTV/88888909/224/3221225772/10000100000000060000000001418882_0.smil?tenantId=8601&GuardEncType=2&accountinfo=%7E%7EV2.0%7ELH8MsPHy59a2ps7cNuwGIgbb4f472881974ad45139740f60c8b033%7E6Iorx0R6PPuLp9_D4PV55Pd6ZuOrk2iveMPkarzv53ZPmzZoULV3xRFRszP7UXOdzxY1cvjgeRQvwo9TXQdkzy-md9jnnjpnTwAG2m5SL-cb833cc23691af2c1835d2cf4f6d08885%7EExtInfoeu7Ia8Nawm0LIgNUil0sFQ9dfc079662e8b7dfd5a2a7316d2aa02e%0%2C485800%2C58.22.240.213%0%0%2C485800%2C-1%2C0%2C1%2C%2C%2C7%2C%2C%2C%2C4%2C%0%2CEND"
+  # - "http://20.253.1.23:80/PLTV/88888888/224/3221225815/10000100000000060000000001110951_0.smil/01.m3u8?fmt=ts2hls,4,01.m3u8,0,7851,0,0&tenantId=8601"
+  # - "rtsp://115.233.41.137/PLTV/88888913/224/3221228078/10000100000000060000000002460690_0.smil"
+  # - "rtsp://10.15.250.13/PLTV/88888888/224/0/3221226118/iptv65795.smil"
+# 新增代理配置
+proxyTypes:
+  - "socks5"
+  # - "socks4a"
+  # - "http"
+  # - "https"
+proxyAuthEnabled: false # 是否开启代理认证
+proxyUsername: "qist" # 代理用户名
+proxyPassword: "Q22yI8bG$1e" # 代理密码
+proxyTimeout: 10 # 请求查询时间秒
+validateContent: false # 是否验证内容内容 false 不验证 只要是200 的都写入文件
+retryTimes: 0 # 重试次数
+retryIntervalSeconds: 1  # 重试间隔，单位秒
+# 代理ip 出口ip获取
+RealIPApiURLs:
+  # - "https://ipinfo.io"
+  - "https://ip.zxinc.org/api.php"
+  # - "https://api.ipify.org"
+  # - "https://ip.seeip.org"
+  - "https://myip.ipip.net"
+  - "https://ifconfig.me/ip"
+
+# IP归属地查询
+ip_info_apis:
+  - url: "https://opendata.baidu.com/api.php?co=&resource_id=6006&oe=utf8&query={ip}"
+    code_key: "status"
+    expected_code: "0"
+    province_key: "data.0.location"
+    isp_key: "data.0.location"
+  - url: "https://mesh.if.iqiyi.com/aid/ip/info?version=1.1.1&ip={ip}"
+    code_key: "code"
+    expected_code: "0"
+    province_key: "data.provinceCN"
+    isp_key: "data.ispCN"
+  - url: "https://ipinfo.io/{ip}"
+    code_key: "readme"
+    expected_code: "https://ipinfo.io/missingauth"
+    province_key: "city"
+    isp_key: "org"
+
+# 设置 UA
+uaHeaders:
+  User-Agent:
+    - "okhttp/3.12.0"
+
+# HTTP代理配置（Enabled参数必须加上）
+HttpProxy:
+  Enabled: false
+  headers:
+    Host: "153.3.236.22:443"
+    X-T5-Auth: "683556433"
+    User-Agent: "okhttp/3.11.0 SP-engine/2.71.0 Dalvik/2.1.0 (Linux; U; Android 9; HMA-AL00 Build/PQ3B.190801.002) baiduboxapp/13.33.0.11 (Baidu; P1 9)"
+    # 可以根据需要添加更多的Headers
+# 设置 线程数
+maxConcurrentRequests: 2000
+
+# 设置输出到文件名
+successfulIPsFile: "successful_zubo.txt"
+
+# 设置扫描ip地址
+cidrFile: "zubo.txt" # 支持子网192.168.0.0/24 支持端口192.168.0.151:7890 也支持单个ip 192.168.0.151
+
+# 配置文件缓冲区大小
+FileBufferSize: 200
+
+# 是否开启日志显示 true 开启 false 关闭
+logEnabled: true
