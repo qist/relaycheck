@@ -1,18 +1,18 @@
 package parser
+
 import (
 	"bufio"
+	"errors"
+	"fmt"
+	"github.com/qist/relaycheck/config"
+	"github.com/qist/relaycheck/proxyscanner"
+	"github.com/qist/relaycheck/worker"
+	"log"
 	"net"
 	"os"
 	"strconv"
 	"strings"
-	"log"
-	"errors"
-	"github.com/qist/relaycheck/config"
-	"github.com/qist/relaycheck/worker"
-	"github.com/qist/relaycheck/proxyscanner"
-	
 )
-
 
 // 修改parseCIDRFile函数，使用新的代理检测逻辑
 func ParseCIDRFile(wp *worker.WorkerPool, successfulIPsCh chan<- string) error {
@@ -21,7 +21,10 @@ func ParseCIDRFile(wp *worker.WorkerPool, successfulIPsCh chan<- string) error {
 		return err
 	}
 	defer file.Close()
-
+	ports, err := expandPorts(config.Cfg.Ports)
+	if err != nil {
+		return err
+	}
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := strings.TrimSpace(scanner.Text())
@@ -59,12 +62,7 @@ func ParseCIDRFile(wp *worker.WorkerPool, successfulIPsCh chan<- string) error {
 			ips := getAllIPsInRange(ipnet)
 			for _, ip := range ips {
 				formattedIP := formatIPForHostPort(ip)
-				for _, portStr := range config.Cfg.Ports{
-					port, err := strconv.Atoi(portStr)
-					if err != nil {
-						log.Printf("端口转换失败 %s: %v\n", portStr, err)
-						continue
-					}
+				for _, port := range ports {
 					wp.AddTask(worker.Task{
 						IP:       formattedIP,
 						Port:     port,
@@ -78,12 +76,7 @@ func ParseCIDRFile(wp *worker.WorkerPool, successfulIPsCh chan<- string) error {
 		// 判断是否为普通 IP（IPv4 或 IPv6）
 		if net.ParseIP(line) != nil {
 			formattedIP := formatIPForHostPort(line)
-			for _, portStr := range config.Cfg.Ports {
-				port, err := strconv.Atoi(portStr)
-				if err != nil {
-					log.Printf("端口转换失败 %s: %v\n", portStr, err)
-					continue
-				}
+			for _, port := range ports {
 				wp.AddTask(worker.Task{
 					IP:       formattedIP,
 					Port:     port,
@@ -155,4 +148,50 @@ func incIP(ip net.IP) {
 			break
 		}
 	}
+}
+
+// expandPorts 解析端口配置，支持:
+func expandPorts(portRanges []string) ([]int, error) {
+	var ports []int
+
+	for _, raw := range portRanges {
+		raw = strings.TrimSpace(raw)
+		if raw == "" {
+			continue
+		}
+
+		// 端口范围
+		if strings.Contains(raw, "-") {
+			parts := strings.SplitN(raw, "-", 2)
+			if len(parts) != 2 {
+				return nil, fmt.Errorf("无效的端口范围: %s", raw)
+			}
+
+			start, err1 := strconv.Atoi(strings.TrimSpace(parts[0]))
+			end, err2 := strconv.Atoi(strings.TrimSpace(parts[1]))
+
+			if err1 != nil || err2 != nil {
+				return nil, fmt.Errorf("无效的端口范围: %s", raw)
+			}
+
+			if start <= 0 || end > 65535 || start > end {
+				return nil, fmt.Errorf("端口范围越界: %s", raw)
+			}
+
+			for p := start; p <= end; p++ {
+				ports = append(ports, p)
+			}
+			continue
+		}
+
+		// 单端口
+		port, err := strconv.Atoi(raw)
+		if err != nil || port <= 0 || port > 65535 {
+			return nil, fmt.Errorf("无效的端口: %s", raw)
+		}
+
+		ports = append(ports, port)
+	}
+
+	return ports, nil
 }
