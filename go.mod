@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/bluenviron/gortsplib/v4 v4.16.2
 	github.com/tidwall/gjson v1.18.0
-	golang.org/x/net v0.50.0
+	golang.org/x/net v0.51.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
