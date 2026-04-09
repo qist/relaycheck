@@ -1,10 +1,11 @@
 package config
 
 import (
-	"gopkg.in/yaml.v3"
 	_ "embed"
-	"strings"
 	"os"
+	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
 // --- 代理访问统一模块 ---
@@ -36,11 +37,11 @@ type Config struct {
 }
 
 type IPInfoAPIConfig struct {
-	URL          string `yaml:"url"`
-	CodeKey      string `yaml:"code_key"`
-	ExpectedCode string `yaml:"expected_code"`
-	ProvinceKey  string `yaml:"province_key"`
-	ISPKey       string `yaml:"isp_key"`
+	URL          string `yaml:"url" json:"url"`
+	CodeKey      string `yaml:"code_key" json:"code_key"`
+	ExpectedCode string `yaml:"expected_code" json:"expected_code"`
+	ProvinceKey  string `yaml:"province_key" json:"province_key"`
+	ISPKey       string `yaml:"isp_key" json:"isp_key"`
 }
 
 var Cfg Config

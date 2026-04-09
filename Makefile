@@ -87,4 +87,4 @@ $(OUT_DIR)/Relaycheck-android-arm64:
 	CGO_ENABLED=0 GOOS=android GOARCH=arm64 go build -ldflags "$(LDFLAGS)" -gcflags="$(GCFLAGS)"  -asmflags="$(ASMFLAGS)" -o $@ .
 
 clean:
-	rm -rf $(OUT_DIR)
+	rm -rf $(OUT_DIR)/Relaycheck*

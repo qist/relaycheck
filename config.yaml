@@ -8,6 +8,7 @@ ports:
   # - "7891"
 urlPaths:
   # - "http://live2.rxip.sc96655.com/live/emdy4k_8000.m3u8?E=1&U=1&A=1&K=1&P=1&S=1"  # 完整URL地址
+  # - "http://cqcu1.live.cbncdn.cn:80/session/36dbc9c4-2cf9-11f1-87c8-5254006225bb$h1.0$hls.live.cqccn.com/rx45vo/__cl/cg:live/__c/cctv1HD/__op/default/__f/index.m3u8?token=5ce7e754a77c01bc011a2e4a83ce6f4c_1775044830_1775044830"
   # - "http://sc.rrs.169ol.com/PLTV/88888888/224/3221227988/index.m3u8"
   # - "http://rrs03.hw.gmcc.net:8088/PLTV/651/224/3221226737/1.m3u8"
   # - "http://ott.fj.chinamobile.com/PLTV/88888888/224/3221226908/index.m3u8"
@@ -50,11 +51,14 @@ urlPaths:
   # - "http://39.134.64.87:6610/PLTV/88888888/224/3221226016/index.m3u8?IASHttpSessionId="
   # - "http://tencent.live.cbncdn.cn/__cl/cg:live/__c/cctv11HD/__op/default/__f/index.m3u8?&sign=b5bc72bbb1192b8b710430b7d397b3c6&t=1754053902"
   - "https://www.baidu.com"
+  # - "rtsp://60.21.225.50:554/PLTV/88888888/224/0/3221226118/iptv65795.smil"
+  # - "http://tc.cdn.hunancatv.com/live/CCTV16HD.m3u8"
   # - "http://cache.ott.bestlive.itv.cmvideo.cn:80/000000001000/5000000004000002226/1.m3u8?stbId=37db0584d2bf5830e5d28241380ecbc5&livemode=1&channel-id=bestzb&Contentid=5000000004000002226&mos=jbjhhzstsl&version=1.0&owaccmark=5000000004000002226&owchid=bestzb&owsid=5918011765269157509&AuthInfo=ewHaCCw8B6%2FPcAUTjJh89CU%2BhuXyIBKt2MAlaOP2YQbGGJjmdhNK8cnZv%2FhnhyffSBda0MJF8M355nTiFsr%2BVqmzprIn4r5YocOy0UFmuKqBC7YourrVBvu9rz0jWmUo"
   # - "https://liveplay-coocaa-sxiptv.ifengli.com/live/cctv-1HD/playlist.m3u8?wsSecret=facd6276161b34b68c9a6ad5495b6cfc&wsABSTime=6928f7d0&us=0"
   # - "http://172.31.203.136:8006/jscn/LianYunGangZongHeHD.m3u8"
   # - "http://live-gitv-hbyx-yh.189smarthome.com/live/OP001/IP-CCTV-1HD/index.m3u8?id=766724911246@ott&exp=20250826T110719&key=ec26746c85d8768836d443931608e6ba&mac=520FD78B9BFF&secret=ec4688c44e320da2a754a9d8a9c9fd25&time=20250827110719"
   # - "https://www.google.com"
+  # - "rtsp://10.15.250.13/PLTV/88888888/224/0/3221226118/iptv65795.smil"
   # - "http://hwrr.jx.chinamobile.com:8080/PLTV/88888888/224/3221225642/index.m3u8"
   # - "rtsp://139.215.98.88/PLTV/88888888/224/3221225620/10000100000000060000000014261464_0.smil"
   # - "http://4gtv.korice.eu.org/4gtv-live030/index.m3u8"

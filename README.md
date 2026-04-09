@@ -80,6 +80,9 @@ make clean
 - `-output`  输出 YAML 文件路径，默认 `filtered_proxies.yaml`
 - `-name`    Clash YAML name 前缀，默认 `广东电信`
 - `-maxsec`  最大耗时秒数，0 表示不过滤
+- `-ui`      启动 Web 界面（表单填写扫描参数）
+- `-listen`  Web 界面监听地址（仅在 `-ui` 时生效），默认 `127.0.0.1:8080`
+- `-version` 显示程序版本
 
 示例：
 
@@ -97,4 +100,37 @@ make clean
 ./Relaycheck-linux-amd64 -tvgate
 ## 生成TVgate，过滤耗时超过2秒的代理
 ./Relaycheck-linux-amd64 -config=config.yaml -tvgate -input=successful_zubo.txt -output=tvgate.yaml -name="广东电信" -maxsec=2
+
+## 启动 Web 界面（默认仅本机访问）
+./Relaycheck-linux-amd64 -ui
+## 指定监听地址
+./Relaycheck-linux-amd64 -ui -listen=0.0.0.0:8080
 ```
+
+---
+
+### Web 界面说明
+
+启动后访问 `http://127.0.0.1:8080/`（或你指定的 `-listen` 地址）。
+
+Web 界面支持：
+
+- 表单填写扫描参数（不读取 `config.yaml`）
+	- CIDR / IP / IP:PORT（每行一条）
+	- 端口（支持范围，例如 `7890-7900`；逗号/换行分隔）
+	- 代理类型（例如 `socks5,http`）
+	- URLPaths（例如 `https://www.baidu.com`）
+	- 并发、超时、重试次数与间隔
+	- 可选代理认证
+- 高级参数（可编辑，默认已填好）
+	- User-Agent：默认 `okhttp/3.12.0`
+	- RealIPApiURLs：出口 IP 获取接口列表（数组按顺序尝试，失败自动切换下一个）
+	- ip_info_apis：归属地查询接口列表（数组按顺序尝试，失败自动切换下一个）
+- 扫描过程中实时显示输出
+- 成功结果独立显示（成功数量 + 成功表格：类型/代理IP/归属地/出口IP/出口归属地/URL/耗时）
+
+注意：
+
+- Web 界面不读取 `config.yaml`，所有参数以页面表单为准
+- `ip_info_apis` 在 Web 中以 JSON 数组形式填写，字段名与 `config.yaml` 一致：
+	- `url`、`code_key`、`expected_code`、`province_key`、`isp_key`
