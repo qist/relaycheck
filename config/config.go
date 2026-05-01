@@ -38,6 +38,8 @@ type Config struct {
 
 type IPInfoAPIConfig struct {
 	URL          string `yaml:"url" json:"url"`
+	Type         string `yaml:"type" json:"type"`                   // "json" (默认) 或 "html"
+	Regexp       string `yaml:"regexp" json:"regexp"`               // HTML 模式下的正则，需含 (?P<province>...) 和 (?P<isp>...) 命名捕获组
 	CodeKey      string `yaml:"code_key" json:"code_key"`
 	ExpectedCode string `yaml:"expected_code" json:"expected_code"`
 	ProvinceKey  string `yaml:"province_key" json:"province_key"`

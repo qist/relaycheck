@@ -27,14 +27,29 @@ func main() {
 	maxSec := flag.Float64("maxsec", 0, "最大耗时秒数，0 表示不过滤")
 	VersionFlag := flag.Bool("version", false, "显示程序版本")
 	uiFlag := flag.Bool("ui", false, "启动 Web 界面")
-	listenAddr := flag.String("listen", "127.0.0.1:8080", "Web 界面监听地址（仅在 -ui 时生效）")
+	listenAddr := flag.String("listen", "0.0.0.0:8080", "Web 界面监听地址")
 	flag.Parse()
 	if *VersionFlag {
 		fmt.Println("程序版本:", config.Version)
 		return
 	}
 
+	// 判断用户是否显式指定了 -config
+	configExplicit := false
+	flag.Visit(func(f *flag.Flag) {
+		if f.Name == "config" {
+			configExplicit = true
+		}
+	})
+
+	// 默认启动 UI；显式指定 -config 或 -ui 时走对应逻辑
 	if *uiFlag {
+		if err := StartUI(*listenAddr); err != nil {
+			log.Fatalf("启动 Web 界面失败: %v", err)
+		}
+		return
+	}
+	if !configExplicit {
 		if err := StartUI(*listenAddr); err != nil {
 			log.Fatalf("启动 Web 界面失败: %v", err)
 		}

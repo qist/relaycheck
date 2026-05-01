@@ -107,6 +107,7 @@ retryIntervalSeconds: 1  # 重试间隔，单位秒
 # 代理ip 出口ip获取
 RealIPApiURLs:
   # - "https://ipinfo.io"
+  - "https://my.ip.cn"
   - "https://ip.zxinc.org/api.php"
   # - "https://api.ipify.org"
   # - "https://ip.seeip.org"
@@ -115,6 +116,9 @@ RealIPApiURLs:
 
 # IP归属地查询
 ip_info_apis:
+  - url: "https://ip.cn/ip/{ip}.html"
+    type: "html"
+    regexp: '<span id="tab0_address">(?P<province>[^<]+)</span>'
   - url: "https://opendata.baidu.com/api.php?co=&resource_id=6006&oe=utf8&query={ip}"
     code_key: "status"
     expected_code: "0"

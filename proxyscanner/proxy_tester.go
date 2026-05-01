@@ -108,7 +108,12 @@ func getIPInfo(ip string) (province, isp string) {
 
 	for _, apiCfg := range config.Cfg.IPInfoAPIs {
 		url := strings.Replace(apiCfg.URL, "{ip}", ip, 1)
-		resp, err := client.Get(url)
+		req, err := http.NewRequest("GET", url, nil)
+		if err != nil {
+			continue
+		}
+		req.Header.Set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0")
+		resp, err := client.Do(req)
 		if err != nil {
 			continue
 		}
@@ -116,6 +121,34 @@ func getIPInfo(ip string) (province, isp string) {
 		resp.Body.Close()
 
 		bodyStr := string(body)
+
+		if apiCfg.Type == "html" && apiCfg.Regexp != "" {
+			re, err := regexp.Compile(apiCfg.Regexp)
+			if err != nil {
+				continue
+			}
+			match := re.FindStringSubmatch(bodyStr)
+			if match == nil {
+				continue
+			}
+			prov, ispData := "", ""
+			for i, name := range re.SubexpNames() {
+				if i >= len(match) {
+					break
+				}
+				switch name {
+				case "province":
+					prov = strings.TrimSpace(match[i])
+				case "isp":
+					ispData = strings.TrimSpace(match[i])
+				}
+			}
+			if prov != "" || ispData != "" {
+				return prov, ispData
+			}
+			continue
+		}
+
 		if gjson.Get(bodyStr, apiCfg.CodeKey).String() != apiCfg.ExpectedCode {
 			continue
 		}
@@ -131,7 +164,7 @@ func getIPInfo(ip string) (province, isp string) {
 }
 
 func getRealIPViaProxy(proxyType, ip string, port int, realIPApiURLs []string, timeout int, retryTimes int, retryIntervalSeconds int) string {
-	headers := map[string][]string{"User-Agent": {"curl/7.76.1"}}
+	headers := map[string][]string{"User-Agent": {"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36 Edg/147.0.0.0"}}
 
 	// IPv4 和 IPv6 正则
 	reIPv4 := regexp.MustCompile(`\b(?:\d{1,3}\.){3}\d{1,3}\b`)

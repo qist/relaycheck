@@ -341,6 +341,7 @@ func (f uiScanForm) toConfig() (*config.Config, string, error) {
 		cfg.RealIPApiURLs = realAPIs
 	} else {
 		cfg.RealIPApiURLs = []string{
+			"https://my.ip.cn",
 			"https://ip.zxinc.org/api.php",
 			"https://myip.ipip.net",
 			"https://ifconfig.me/ip",
@@ -352,6 +353,11 @@ func (f uiScanForm) toConfig() (*config.Config, string, error) {
 			cfg.IPInfoAPIs = apis
 		} else {
 			cfg.IPInfoAPIs = []config.IPInfoAPIConfig{
+				{
+					URL:    "https://ip.cn/ip/{ip}.html",
+					Type:   "html",
+					Regexp: `<span id="tab0_address">(?P<province>[^<]+)</span>`,
+				},
 				{
 					URL:          "https://opendata.baidu.com/api.php?co=&resource_id=6006&oe=utf8&query={ip}",
 					CodeKey:      "status",
@@ -377,6 +383,11 @@ func (f uiScanForm) toConfig() (*config.Config, string, error) {
 		}
 	} else {
 		cfg.IPInfoAPIs = []config.IPInfoAPIConfig{
+			{
+				URL:    "https://ip.cn/ip/{ip}.html",
+				Type:   "html",
+				Regexp: `<span id="tab0_address">(?P<province>[^<]+)</span>`,
+			},
 			{
 				URL:          "https://opendata.baidu.com/api.php?co=&resource_id=6006&oe=utf8&query={ip}",
 				CodeKey:      "status",
@@ -678,13 +689,15 @@ const uiIndexHTML = `<!doctype html>
       <div class="row">
         <div>
           <label>出口IP接口 RealIPApiURLs（逗号/换行分隔）</label>
-          <textarea name="realipApis">https://ip.zxinc.org/api.php
+          <textarea name="realipApis">https://my.ip.cn
+https://ip.zxinc.org/api.php
 https://myip.ipip.net
 https://ifconfig.me/ip</textarea>
         </div>
         <div>
           <label>归属地接口 ip_info_apis（JSON 数组）</label>
           <textarea name="ipInfoApis">[
+  {"url":"https://ip.cn/ip/{ip}.html","type":"html","regexp":"<span id=\"tab0_address\">(?P<province>[^<]+)<\/span>"},
   {"url":"https://opendata.baidu.com/api.php?co=&resource_id=6006&oe=utf8&query={ip}","code_key":"status","expected_code":"0","province_key":"data.0.location","isp_key":"data.0.location"},
   {"url":"https://mesh.if.iqiyi.com/aid/ip/info?version=1.1.1&ip={ip}","code_key":"code","expected_code":"0","province_key":"data.provinceCN","isp_key":"data.ispCN"},
   {"url":"https://ipinfo.io/{ip}","code_key":"readme","expected_code":"https://ipinfo.io/missingauth","province_key":"city","isp_key":"org"}
