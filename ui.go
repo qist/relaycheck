@@ -37,8 +37,11 @@ type uiServer struct {
 	listenAddr string
 	runSem     chan struct{}
 
-	mu   sync.Mutex
-	jobs map[string]*uiJob
+	mu       sync.Mutex
+	jobs     map[string]*uiJob
+
+	tplIndex *template.Template
+	tplJob   *template.Template
 }
 
 func StartUI(listenAddr string) error {
@@ -46,6 +49,8 @@ func StartUI(listenAddr string) error {
 		listenAddr: listenAddr,
 		runSem:     make(chan struct{}, 1),
 		jobs:       map[string]*uiJob{},
+		tplIndex:   template.Must(template.New("index").Parse(uiIndexHTML)),
+		tplJob:     template.Must(template.New("job").Parse(uiJobHTML)),
 	}
 
 	mux := http.NewServeMux()
@@ -77,9 +82,8 @@ func (s *uiServer) handleIndex(w http.ResponseWriter, r *http.Request) {
 		RuntimeArch string
 	}
 
-	tpl := template.Must(template.New("index").Parse(uiIndexHTML))
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	_ = tpl.Execute(w, pageData{
+	_ = s.tplIndex.Execute(w, pageData{
 		Version:     config.Version,
 		GoVersion:   runtime.Version(),
 		RuntimeOS:   runtime.GOOS,
@@ -208,9 +212,8 @@ func (s *uiServer) handleJob(w http.ResponseWriter, r *http.Request) {
 	type pageData struct {
 		ID string
 	}
-	tpl := template.Must(template.New("job").Parse(uiJobHTML))
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	_ = tpl.Execute(w, pageData{ID: job.ID})
+	_ = s.tplJob.Execute(w, pageData{ID: job.ID})
 }
 
 func (s *uiServer) handleJobStatus(w http.ResponseWriter, r *http.Request) {

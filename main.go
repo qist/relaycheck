@@ -128,12 +128,22 @@ func runScan(cfg *config.Config, onSuccess func(msg string)) error {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
+		var bw *utils.BufferedWriter
+		if cfg.SuccessfulIPsFile != "" {
+			var err error
+			bw, err = utils.NewBufferedWriter(cfg.SuccessfulIPsFile)
+			if err != nil {
+				log.Printf("创建缓冲写入器失败: %v\n", err)
+			} else {
+				defer bw.Close()
+			}
+		}
 		for successfulIP := range successfulIPsCh {
 			if onSuccess != nil {
 				onSuccess(successfulIP)
 			}
-			if cfg.SuccessfulIPsFile != "" {
-				if err := utils.AppendToFile(cfg.SuccessfulIPsFile, successfulIP); err != nil {
+			if bw != nil {
+				if err := bw.Write(successfulIP); err != nil {
 					log.Printf("写入成功的IP到文件失败: %v\n", err)
 				}
 			}

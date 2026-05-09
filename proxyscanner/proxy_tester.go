@@ -15,6 +15,14 @@ import (
 	"time"
 )
 
+// ipInfoCache 缓存 IP 地理信息查询结果，避免重复请求外部 API
+var ipInfoCache sync.Map
+
+type ipInfo struct {
+	Province string
+	ISP      string
+}
+
 // testProxy 代理检测函数
 func TestProxy(ip string, port int, successfulIPsCh chan<- string) {
 	proxyAddr := fmt.Sprintf("%s:%d", ip, port)
@@ -104,6 +112,14 @@ func isProxyAlive(ip string, port int, timeout int) bool {
 }
 
 func getIPInfo(ip string) (province, isp string) {
+	if ip == "" || ip == "未知" {
+		return "未知", "未知"
+	}
+	if cached, ok := ipInfoCache.Load(ip); ok {
+		info := cached.(ipInfo)
+		return info.Province, info.ISP
+	}
+
 	client := &http.Client{Timeout: 3 * time.Second}
 
 	for _, apiCfg := range config.Cfg.IPInfoAPIs {
@@ -156,10 +172,12 @@ func getIPInfo(ip string) (province, isp string) {
 		province := gjson.Get(bodyStr, apiCfg.ProvinceKey).String()
 		isp := gjson.Get(bodyStr, apiCfg.ISPKey).String()
 		if province != "" || isp != "" {
+			ipInfoCache.Store(ip, ipInfo{Province: province, ISP: isp})
 			return province, isp
 		}
 	}
 
+	ipInfoCache.Store(ip, ipInfo{Province: "未知", ISP: "未知"})
 	return "未知", "未知"
 }
 

@@ -59,9 +59,11 @@ func ParseCIDRFile(wp *worker.WorkerPool, successfulIPsCh chan<- string) error {
 
 		// 判断是否为 CIDR（支持 IPv6 CIDR）
 		if _, ipnet, err := net.ParseCIDR(line); err == nil {
-			ips := getAllIPsInRange(ipnet)
-			for _, ip := range ips {
-				formattedIP := formatIPForHostPort(ip)
+			// 流式遍历 CIDR 中的每个 IP，避免一次性分配所有 IP 到内存
+			startIP := make(net.IP, len(ipnet.IP))
+			copy(startIP, ipnet.IP)
+			for ip := startIP; ipnet.Contains(ip); incIP(ip) {
+				formattedIP := formatIPForHostPort(ip.String())
 				for _, port := range ports {
 					wp.AddTask(worker.Task{
 						IP:       formattedIP,
@@ -123,21 +125,6 @@ func formatIPForHostPort(ip string) string {
 		return "[" + ip + "]"
 	}
 	return ip
-}
-
-// getAllIPsInRange 返回CIDR范围内的所有IP地址
-func getAllIPsInRange(ipnet *net.IPNet) []string {
-	var ips []string
-
-	// 拷贝起始 IP，避免修改原始 ipnet.IP
-	startIP := make(net.IP, len(ipnet.IP))
-	copy(startIP, ipnet.IP)
-
-	for ip := startIP; ipnet.Contains(ip); incIP(ip) {
-		ips = append(ips, ip.String())
-	}
-
-	return ips
 }
 
 // 自增 IP 地址（支持 IPv4 和 IPv6）
