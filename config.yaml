@@ -4,12 +4,15 @@ ports:
   # - "443"
   # - "80-99"
   # - "7890"
-  - 59059
+  #- 59059
   # - "7891"
 urlPaths:
-  # - "http://live2.rxip.sc96655.com/live/emdy4k_8000.m3u8?E=1&U=1&A=1&K=1&P=1&S=1"  # 完整URL地址
+  #- "http://117.135.56.6:6060/cms001/ch00000090990000001710/index.m3u8"
+  #- "http://10.223.3.189/PLTV/88888888/224/3221225703/10000100000000060000000000035351_0.smil/index.m3u8?fmt=ts2hls&tenantId=8601&GuardEncType=2&accountinfo=~~V2.0~p6OgLDvLzq6GN5uNV8rZ0g~GBgYt2G4g3mp1H7Khhun9o6Zuj3ZkcZIB_HquE1b4VEarRFWx1w4xcRrXpOi2MxRI2bJNcVCpNQZiqYy2TQFYgBt4on5bTDSw95vyOkgHqI%2CEND"
+  #- "http://live2.rxip.sc96655.com/live/emdy4k_8000.m3u8?E=1&U=1&A=1&K=1&P=1&S=1"  # 完整URL地址
   # - "http://cqcu1.live.cbncdn.cn:80/session/36dbc9c4-2cf9-11f1-87c8-5254006225bb$h1.0$hls.live.cqccn.com/rx45vo/__cl/cg:live/__c/cctv1HD/__op/default/__f/index.m3u8?token=5ce7e754a77c01bc011a2e4a83ce6f4c_1775044830_1775044830"
-  # - "http://sc.rrs.169ol.com/PLTV/88888888/224/3221227988/index.m3u8"
+  #- "http://sc.rrs.169ol.com/PLTV/88888888/224/3221227988/index.m3u8"
+  #- "http://live.cbncdn.cn/__cl/cg:live/__c/cctv2HD/__op/default/__f/index.m3u8?sig=15b99d3395990d88e6ff596e42b8629a&ext_start_limit=1788525496&int_start_limit=1788525496&expires=1788525496&c=null&p=3073"
   # - "http://rrs03.hw.gmcc.net:8088/PLTV/651/224/3221226737/1.m3u8"
   # - "http://ott.fj.chinamobile.com/PLTV/88888888/224/3221226908/index.m3u8"
   # - "http://iptvrr.sh.chinamobile.com:6060/cms001/ch00000090990000001022/index.m3u8"
@@ -41,6 +44,7 @@ urlPaths:
   # - "http://huaweicdn.hb.chinamobile.com/PLTV/88888888/224/3221226113/1.m3u8"
   # - "rtsp://111.63.123.196:554/PLTV/18/224/3221226472/312109478.smil?accountinfo=~~V2.0~k6yvKDO3kuG5pPEl7CdC3Q18031ce742e96aa977280d3353d34ada~gbMpmmclA7bQsqwiups-_SGGqlDmw8xpon3idujxX38sZxDZ-1uvc2LDNNhPEgga67b45dc3392dccfb17ae101fda2fc04e,END"
   # - "http://ott.mobaibox.com/PLTV/4/224/3221225530/index.m3u8"
+  #- "rtsp://112.111.36.140/PLTV/88888909/224/3221225703/10000100000000060000000000391319_0.smil?tenantId=8601&GuardEncType=2&accountinfo=~~V2.0~WUsyegWOdFhLM6B1o-Xg8wd2e621f44642b2879878235f8ff9255b~t2sl3tplnkdOHqFOYi1aNxUvOl7ePojM1blQ1T-Pwld3btQpci8I1sfYkCIB9mi_7nWaHtiyV3e2wBV9zJ6FrnHiSdQiLNORDfXeidQznBgc320cfd6d769b2a52482f15796d2fce2%2CEND"
   # - "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221228318/index.m3u8?fmt=ts2hls"
   # - "http://hwltc.tv.cdn.zj.chinamobile.com/PLTV/88888888/224/3221236295/index.m3u8?fmt=ts2hls"
   # - "http://[2409:8087:1070:301:2028::23]/gslbserv.iptv.nm.chinamobile.com/PLTV/88888890/224/3221225920/index.m3u8?fmt=ts2hls"
@@ -51,6 +55,10 @@ urlPaths:
   # - "http://39.134.64.87:6610/PLTV/88888888/224/3221226016/index.m3u8?IASHttpSessionId="
   # - "http://tencent.live.cbncdn.cn/__cl/cg:live/__c/cctv11HD/__op/default/__f/index.m3u8?&sign=b5bc72bbb1192b8b710430b7d397b3c6&t=1754053902"
   - "https://www.baidu.com"
+  - "rtsp://123.147.112.17:8089/04000001/01000000004000000000000000000231?"
+  #- "rtsp://115.153.245.70/PLTV/88888888/224/3221225699/iptv8040.smil"
+  #- "http://zterr.hvs.fj.chinamobile.com:6060/PLTV/88888888/224/3221225829/index.m3u8?servicetype=1"
+  #- "rtsp://112.111.36.140/PLTV/88888909/224/3221225772/10000100000000060000000001418882_0.smil?rrsip=220.200.30.136,rrsip=112.111.36.140,rrsip=220.200.30.136&zoneoffset=480&icpid=113&limitflux=-1&limitdur=-1&tenantId=8601&GuardEncType=2&accountinfo=%7E%7EV2.0%7EoSZ5yxj4xcDYcOO7eB1Ktgdef604962a86d8dc38b17f0a341e81a1%7EK5htgoe84g7T8OZem7TbEJZekwJKcbDucLaZF1gVRz9hBzgnu9I0ItXHdBmYO3cv272PGXCH0sD_HPMW7HgMFnry3bhe7VcAV-_gHbfHLM448af63856f583bbff529cf9c2625679c%7EExtInfogGrI6ORmt0nE8dlyZNriywf13d7fcac6767a759e40936f6a91c0e6%3A20260311225515%2C312115%2C175.42.248.124%2C20260311225515%2CBESTV002000000050000000000004988%2C312115%2C-1%2C0%2C1%2C%2C%2C7%2C%2C%2C%2C4%2C%2C10000100000000060000000001418882_0%2CEND"
   # - "rtsp://60.21.225.50:554/PLTV/88888888/224/0/3221226118/iptv65795.smil"
   # - "http://tc.cdn.hunancatv.com/live/CCTV16HD.m3u8"
   # - "http://cache.ott.bestlive.itv.cmvideo.cn:80/000000001000/5000000004000002226/1.m3u8?stbId=37db0584d2bf5830e5d28241380ecbc5&livemode=1&channel-id=bestzb&Contentid=5000000004000002226&mos=jbjhhzstsl&version=1.0&owaccmark=5000000004000002226&owchid=bestzb&owsid=5918011765269157509&AuthInfo=ewHaCCw8B6%2FPcAUTjJh89CU%2BhuXyIBKt2MAlaOP2YQbGGJjmdhNK8cnZv%2FhnhyffSBda0MJF8M355nTiFsr%2BVqmzprIn4r5YocOy0UFmuKqBC7YourrVBvu9rz0jWmUo"
@@ -104,6 +112,12 @@ proxyTimeout: 10 # 请求查询时间秒
 validateContent: false # 是否验证内容内容 false 不验证 只要是200 的都写入文件
 retryTimes: 0 # 重试次数
 retryIntervalSeconds: 1  # 重试间隔，单位秒
+# 吞吐测速：参考 tvgate，读完整段后只统计最后 3 秒速率，
+# 避免「前几秒跑满随后限速/停住」的出口被全程平均测成高带宽。
+speedTest:
+  enabled: true # 扫描命中后测量吞吐并写入成功日志
+  timeout: 15 # 单次测速超时（秒）
+  sampleSizeMB: 8 # 采样上限（MB），需覆盖整个直播分片
 # 代理ip 出口ip获取
 RealIPApiURLs:
   # - "https://ipinfo.io"
@@ -138,8 +152,9 @@ ip_info_apis:
 # 设置 UA
 uaHeaders:
   User-Agent:
-    - "okhttp/3.12.0"
-
+    #- "okhttp/3.12.0"
+    #- "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0"
+    #- "QTP;QTP/2.2.57.3.1"
 # HTTP代理配置（Enabled参数必须加上）
 HttpProxy:
   Enabled: false
@@ -151,7 +166,7 @@ HttpProxy:
 # 设置 线程数
 maxConcurrentRequests: 2000
 
-# 设置输出到文件名
+#设置输出到文件名
 successfulIPsFile: "successful_zubo.txt"
 
 # 设置扫描ip地址

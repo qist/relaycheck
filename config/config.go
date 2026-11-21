@@ -34,6 +34,17 @@ type Config struct {
 	IPInfoAPIs           []IPInfoAPIConfig   `yaml:"ip_info_apis"`
 	RetryTimes           int                 `yaml:"retryTimes"`
 	RetryIntervalSeconds int                 `yaml:"retryIntervalSeconds"`
+	SpeedTest            *SpeedTestConfig    `yaml:"speedTest"`
+}
+
+// SpeedTestConfig 控制扫描命中后的吞吐测速。
+// 未配置时默认开启：测速算法与 tvgate 一致，读取完整分片后只统计
+// 最后 3 秒的速率，避免前段突发把限速/停住的出口测成高带宽。
+type SpeedTestConfig struct {
+	Enabled      bool `yaml:"enabled"`
+	Timeout      int  `yaml:"timeout"`      // 单次测速超时（秒）
+	SampleSizeMB int  `yaml:"sampleSizeMB"` // 正文采样上限（MB），需覆盖整个分片
+	Concurrency  int  `yaml:"concurrency"`  // -speed 模式的并发数，默认 8
 }
 
 type IPInfoAPIConfig struct {

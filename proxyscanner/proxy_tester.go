@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/qist/relaycheck/config"
 	"github.com/qist/relaycheck/proxyutil"
+	"github.com/qist/relaycheck/speedtest"
 	"github.com/tidwall/gjson"
 	"io"
 	"log"
@@ -82,11 +83,30 @@ func TestProxy(ip string, port int, successfulIPsCh chan<- string) {
 
 			rProvince, rISP := getIPInfo(realIP)
 
-			msg := fmt.Sprintf("可用%s代理: %s %s %s 出口IP: %s %s %s 成功访问: %s 耗时: %v\n",
+			// 吞吐测速：命中即写入成功行，方便后续按带宽排序选节点。
+			throughputText := "-"
+			if enabled, timeout, sampleSize := speedtest.Settings(config.Cfg.SpeedTest); enabled {
+				tp := speedtest.Measure(speedtest.Options{
+					ProxyType:   result.proxyType,
+					IP:          ip,
+					Port:        port,
+					URL:         result.urlToTest,
+					Headers:     config.Cfg.UAHeaders,
+					Timeout:     timeout,
+					SampleSize:  sampleSize,
+					AuthEnabled: config.Cfg.ProxyAuthEnabled,
+					Username:    config.Cfg.ProxyUsername,
+					Password:    config.Cfg.ProxyPassword,
+				})
+				throughputText = speedtest.FormatMbps(tp.Throughput)
+			}
+
+			msg := fmt.Sprintf("可用%s代理: %s %s %s 出口IP: %s %s %s 成功访问: %s 吞吐: %s 耗时: %v\n",
 				strings.ToUpper(result.proxyType),
 				proxyAddr, province, isp,
 				realIP, rProvince, rISP,
 				result.urlToTest,
+				throughputText,
 				result.elapsed,
 			)
 

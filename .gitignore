@@ -12,3 +12,8 @@ build/
 output.txt
 input.txt
 convert.py
+__pycache__/
+*.pyc
+jiangxi_*.txt
+chongqing_*.txt
+speed_result.txt

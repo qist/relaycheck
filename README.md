@@ -3,10 +3,14 @@
 ```bash
 git clone https://github.com/qist/relaycheck.git
 cd relaycheck
-make 
-清理 编译 
-make clean
+make            # 编译当前平台，输出 build/Relaycheck-<os>-<arch>
+make all        # 编译全部平台（发布用）
+make test       # 运行测试
+make check      # gofmt 检查 + go vet + test
+make clean      # 清理 build/
 ```
+
+自定义版本号：`make VERSION=v2.0.2`；单独编译某个平台：`make build/Relaycheck-linux-amd64`。
 
 ## 代理扫描&验证工具
 
@@ -37,6 +41,9 @@ make clean
 
 - **retryTimes / retryIntervalSeconds**  
 	失败重试次数与重试间隔（秒）。
+
+- **speedTest**  
+	吞吐测速配置（参考 tvgate）。`enabled` 控制扫描命中后是否测速；`timeout` 为单次测速超时秒数；`sampleSizeMB` 为采样上限（需覆盖整个直播分片）。HTTP/HTTPS/m3u8 会读取完整分片，只按最后 3 秒计算后段速率；RTSP 在 PLAY 后采样 2 秒 RTP 载荷计算码率。吞吐会写入成功日志的 `吞吐: xx.xMbps` 字段。
 
 - **RealIPApiURLs**  
 	用于获取出口IP的API地址列表。
@@ -82,6 +89,8 @@ make clean
 - `-maxsec`  最大耗时秒数，0 表示不过滤
 - `-ui`      启动 Web 界面（表单填写扫描参数）
 - `-listen`  Web 界面监听地址（仅在 `-ui` 时生效），默认 `127.0.0.1:8080`
+- `-speed`   测速模式：读取 `-input` 中的代理并测量吞吐，结果写入 `-output`
+- `-speedurl` 测速目标 URL，默认取配置文件第一个 `urlPaths`
 - `-version` 显示程序版本
 
 示例：
@@ -100,6 +109,11 @@ make clean
 ./Relaycheck-linux-amd64 -tvgate
 ## 生成TVgate，过滤耗时超过2秒的代理
 ./Relaycheck-linux-amd64 -config=config.yaml -tvgate -input=successful_zubo.txt -output=tvgate.yaml -name="广东电信" -maxsec=2
+
+## 对已有成功列表测速（参考 tvgate，读完整分片取后段速率）
+./Relaycheck-linux-amd64 -speed -input=successful_zubo.txt -output=speed_result.txt
+## 指定测速目标
+./Relaycheck-linux-amd64 -speed -input=successful_zubo.txt -output=speed_result.txt -speedurl="http://example.com/live/index.m3u8"
 
 ## 启动 Web 界面（默认仅本机访问）
 ./Relaycheck-linux-amd64 -ui

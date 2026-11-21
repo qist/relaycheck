@@ -11,6 +11,7 @@ import (
 	"github.com/qist/relaycheck/config"
 	"github.com/qist/relaycheck/mihomo"
 	"github.com/qist/relaycheck/parser"
+	"github.com/qist/relaycheck/speedtest"
 	"github.com/qist/relaycheck/tvgate"
 	"github.com/qist/relaycheck/utils"
 	"github.com/qist/relaycheck/worker"
@@ -28,6 +29,8 @@ func main() {
 	VersionFlag := flag.Bool("version", false, "显示程序版本")
 	uiFlag := flag.Bool("ui", false, "启动 Web 界面")
 	listenAddr := flag.String("listen", "0.0.0.0:8080", "Web 界面监听地址")
+	speedFlag := flag.Bool("speed", false, "测速模式：对输入文件中的代理测量吞吐并写入输出文件")
+	speedURL := flag.String("speedurl", "", "测速目标 URL，默认取配置文件第一个 urlPaths")
 	flag.Parse()
 	if *VersionFlag {
 		fmt.Println("程序版本:", config.Version)
@@ -41,6 +44,26 @@ func main() {
 			configExplicit = true
 		}
 	})
+
+	// 测速模式：读取代理列表，测量吞吐后写入结果文件
+	if *speedFlag {
+		cfg, err := config.LoadConfig(*configFile)
+		if err != nil {
+			log.Fatalf("加载配置文件失败: %v", err)
+		}
+		input := *inputFile
+		if input == "" {
+			input = cfg.SuccessfulIPsFile
+		}
+		output := *outputFile
+		if output == "" {
+			output = "speed_result.txt"
+		}
+		if err := speedtest.RunFile(input, output, *speedURL, cfg, func(s string) { fmt.Print(s) }); err != nil {
+			log.Fatalf("测速失败: %v", err)
+		}
+		return
+	}
 
 	// 默认启动 UI；显式指定 -config 或 -ui 时走对应逻辑
 	if *uiFlag {

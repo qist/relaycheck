@@ -129,6 +129,7 @@ func (s *uiServer) handleRun(w http.ResponseWriter, r *http.Request) {
 		ProxyUsername:         r.FormValue("username"),
 		ProxyPassword:         r.FormValue("password"),
 		ValidateContent:       r.FormValue("validateContent"),
+		SpeedTestEnabled:      r.FormValue("speedTest"),
 		LogEnabled:            r.FormValue("logEnabled"),
 		UserAgent:             r.FormValue("ua"),
 		RealIPAPIsText:        r.FormValue("realipApis"),
@@ -268,6 +269,7 @@ type uiScanForm struct {
 	ProxyUsername         string
 	ProxyPassword         string
 	ValidateContent       string
+	SpeedTestEnabled      string
 	LogEnabled            string
 	UserAgent             string
 	RealIPAPIsText        string
@@ -326,6 +328,9 @@ func (f uiScanForm) toConfig() (*config.Config, string, error) {
 		ValidateContent:      parseBoolDefault(f.ValidateContent, false),
 		RetryTimes:           retryTimes,
 		RetryIntervalSeconds: retryInterval,
+		SpeedTest: &config.SpeedTestConfig{
+			Enabled: parseBoolDefault(f.SpeedTestEnabled, true),
+		},
 	}
 
 	ua := strings.TrimSpace(f.UserAgent)
@@ -525,21 +530,23 @@ func randID(nBytes int) string {
 }
 
 type uiSuccess struct {
-	ProxyType   string `json:"proxyType"`
-	ProxyAddr   string `json:"proxyAddr"`
-	ProxyGeo    string `json:"proxyGeo"`
-	ExitIP      string `json:"exitIp"`
-	ExitGeo     string `json:"exitGeo"`
-	URL         string `json:"url"`
-	ElapsedText string `json:"elapsed"`
+	ProxyType      string `json:"proxyType"`
+	ProxyAddr      string `json:"proxyAddr"`
+	ProxyGeo       string `json:"proxyGeo"`
+	ExitIP         string `json:"exitIp"`
+	ExitGeo        string `json:"exitGeo"`
+	URL            string `json:"url"`
+	ThroughputText string `json:"throughput"`
+	ElapsedText    string `json:"elapsed"`
 }
 
 func parseSuccessMsg(s string) (uiSuccess, bool) {
 	const (
-		tagProxy   = "代理:"
-		tagExit    = "出口IP:"
-		tagAccess  = "成功访问:"
-		tagElapsed = "耗时:"
+		tagProxy      = "代理:"
+		tagExit       = "出口IP:"
+		tagAccess     = "成功访问:"
+		tagThroughput = "吞吐:"
+		tagElapsed    = "耗时:"
 	)
 
 	s = strings.TrimSpace(s)
@@ -549,11 +556,15 @@ func parseSuccessMsg(s string) (uiSuccess, bool) {
 	iProxy := strings.Index(s, tagProxy)
 	iExit := strings.Index(s, tagExit)
 	iAccess := strings.Index(s, tagAccess)
+	iThroughput := strings.Index(s, tagThroughput)
 	iElapsed := strings.Index(s, tagElapsed)
 	if iProxy < 0 || iExit < 0 || iAccess < 0 || iElapsed < 0 {
 		return uiSuccess{}, false
 	}
-	if !(iProxy < iExit && iExit < iAccess && iAccess < iElapsed) {
+	if iThroughput >= 0 && !(iProxy < iExit && iExit < iAccess && iAccess < iThroughput && iThroughput < iElapsed) {
+		return uiSuccess{}, false
+	}
+	if iThroughput < 0 && !(iProxy < iExit && iExit < iAccess && iAccess < iElapsed) {
 		return uiSuccess{}, false
 	}
 
@@ -561,7 +572,15 @@ func parseSuccessMsg(s string) (uiSuccess, bool) {
 
 	left := strings.TrimSpace(s[iProxy+len(tagProxy) : iExit])
 	right := strings.TrimSpace(s[iExit+len(tagExit) : iAccess])
-	url := strings.TrimSpace(s[iAccess+len(tagAccess) : iElapsed])
+	urlEnd := iElapsed
+	if iThroughput >= 0 {
+		urlEnd = iThroughput
+	}
+	url := strings.TrimSpace(s[iAccess+len(tagAccess) : urlEnd])
+	throughput := ""
+	if iThroughput >= 0 {
+		throughput = strings.TrimSpace(s[iThroughput+len(tagThroughput) : iElapsed])
+	}
 	elapsed := strings.TrimSpace(s[iElapsed+len(tagElapsed):])
 
 	leftParts := strings.Fields(left)
@@ -576,13 +595,14 @@ func parseSuccessMsg(s string) (uiSuccess, bool) {
 	exitGeo := strings.TrimSpace(strings.Join(rightParts[1:], " "))
 
 	return uiSuccess{
-		ProxyType:   proxyType,
-		ProxyAddr:   proxyAddr,
-		ProxyGeo:    proxyGeo,
-		ExitIP:      exitIP,
-		ExitGeo:     exitGeo,
-		URL:         url,
-		ElapsedText: elapsed,
+		ProxyType:      proxyType,
+		ProxyAddr:      proxyAddr,
+		ProxyGeo:       proxyGeo,
+		ExitIP:         exitIP,
+		ExitGeo:        exitGeo,
+		URL:            url,
+		ThroughputText: throughput,
+		ElapsedText:    elapsed,
 	}, true
 }
 
@@ -669,6 +689,10 @@ const uiIndexHTML = `<!doctype html>
         </div>
       </div>
 
+      <label>吞吐测速（speedTest：true/false）</label>
+      <input name="speedTest" value="true" />
+      <div class="hint">开启后读取完整分片，只按最后 3 秒计算后段速率，测速结果写入成功日志。</div>
+
       <div class="row">
         <div>
           <label>用户名（username）</label>
@@ -747,6 +771,7 @@ const uiJobHTML = `<!doctype html>
         <th>出口IP</th>
         <th>出口归属地</th>
         <th>URL</th>
+        <th>吞吐</th>
         <th>耗时</th>
       </tr>
     </thead>
@@ -780,6 +805,7 @@ const uiJobHTML = `<!doctype html>
             it.exitIp || '',
             it.exitGeo || '',
             it.url || '',
+            it.throughput || '',
             it.elapsed || '',
           ];
           for (const c of cols) {

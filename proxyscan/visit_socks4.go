@@ -9,6 +9,7 @@ import (
 func VisitSocks4AProxy(ip string, port int, urlToTest string, uaHeaders map[string][]string, timeout int, validateContent bool, raw bool, retryTimes int, retryIntervalSeconds int) (bool, string) {
 	const maxRedirects = 5
 
+	lastMsg := "未知错误"
 	for attempt := 1; attempt <= retryTimes; attempt++ {
 		currentURL := urlToTest
 
@@ -16,6 +17,7 @@ func VisitSocks4AProxy(ip string, port int, urlToTest string, uaHeaders map[stri
 			ok, result, redirectLocation := proxysocks.VisitSocks4ASingleRequest(ip, port, currentURL, uaHeaders, timeout, validateContent, raw)
 			if !ok {
 				// 这次失败，但还有重试机会
+				lastMsg = result
 				break
 			}
 			if redirectLocation == "" {
@@ -24,6 +26,9 @@ func VisitSocks4AProxy(ip string, port int, urlToTest string, uaHeaders map[stri
 			}
 			// 继续重定向
 			currentURL = redirectLocation
+			if redirectCount == maxRedirects {
+				lastMsg = fmt.Sprintf("重定向次数超过 %d", maxRedirects)
+			}
 		}
 
 		// 当前 attempt 的所有重定向都失败了，等待后重试
@@ -32,5 +37,8 @@ func VisitSocks4AProxy(ip string, port int, urlToTest string, uaHeaders map[stri
 		}
 	}
 
-	return false, fmt.Sprintf("尝试 %d 次后仍失败", retryTimes)
+	if retryTimes <= 1 {
+		return false, lastMsg
+	}
+	return false, fmt.Sprintf("尝试 %d 次后仍失败: %s", retryTimes, lastMsg)
 }
