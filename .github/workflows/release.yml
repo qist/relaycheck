@@ -122,7 +122,10 @@ jobs:
           tag: ${{ github.ref_name }}
           file: ${{ env.FILE }}
           asset_name: ${{ env.FILE_NAME }}
-          prerelease: true
+          release_name: Relaycheck ${{ github.ref_name }}
+          body: "打包产物：${{ env.FILE_NAME }}，版本 ${{ env.VERSION }}"
+          draft: false
+          prerelease: false
           overwrite: true
 
       - name: Upload Release Asset (checksum)
@@ -132,5 +135,7 @@ jobs:
           tag: ${{ github.ref_name }}
           file: ${{ env.CHECKSUM }}
           asset_name: ${{ env.CHECKSUM_NAME }}
-          prerelease: true
+          release_name: Relaycheck ${{ github.ref_name }}
+          draft: false
+          prerelease: false
           overwrite: true
